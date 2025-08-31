@@ -7,7 +7,6 @@ linter:
     - always_declare_return_types
     - always_put_control_body_on_new_line
     # - always_put_required_named_parameters_first # not useful for Widgets
-    - always_require_non_null_named_parameters
     #- always_specify_types # This would enforce to write types literally everywhere.
     - annotate_overrides
     #- avoid_annotating_with_dynamic # Explicit annotation of dynamic as type is preferable. Also exclusive with type_annotate_public_apis
