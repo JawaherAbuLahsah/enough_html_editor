@@ -131,36 +131,23 @@ class _CustomScrollEditorPageState extends State<CustomScrollEditorPage> {
           slivers: [
             PlatformSliverAppBar(
               title: const Text('Sticky controls'),
-              material: (_, __) => MaterialSliverAppBarData(
-                floating: false,
-                pinned: true,
-                actions: [
-                  DensePlatformIconButton(
-                    icon: const Icon(Icons.send),
-                    onPressed: () async {
-                      final text = await _editorApi?.getText() ?? '';
-                      print('got text: [$text]');
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ResultScreen(htmlText: text),
-                        ),
-                      );
-                    },
-                  ),
-                  DensePlatformIconButton(
-                    icon: const Icon(Icons.looks_one),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const EditorPage(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              cupertino: (_, __) => CupertinoSliverAppBarData(
-                leading: DensePlatformIconButton(
+              floating: false,
+              pinned: true,
+              stretch: true,
+              actions: [
+                DensePlatformIconButton(
+                  icon: const Icon(Icons.send),
+                  onPressed: () async {
+                    final text = await _editorApi!.getText();
+                    print('got text: [$text]');
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ResultScreen(htmlText: text),
+                      ),
+                    );
+                  },
+                ),
+                DensePlatformIconButton(
                   icon: const Icon(Icons.looks_one),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -170,20 +157,7 @@ class _CustomScrollEditorPageState extends State<CustomScrollEditorPage> {
                     );
                   },
                 ),
-                trailing: DensePlatformIconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () async {
-                    final text = await _editorApi?.getText() ?? '';
-                    print('got text: [$text]');
-                    await Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ResultScreen(htmlText: text),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              stretch: true,
+              ],
             ),
             const SliverToBoxAdapter(
               child: Padding(
@@ -220,8 +194,8 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => PlatformScaffold(
-        appBar: const PlatformAppBar(
-          title: Text('Result'),
+        appBar: PlatformAppBar(
+          title: const Text('Result'),
         ),
         body: SingleChildScrollView(
           child: SafeArea(child: SelectableText(htmlText)),
